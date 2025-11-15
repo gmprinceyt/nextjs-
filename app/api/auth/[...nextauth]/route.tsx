@@ -9,7 +9,7 @@ const authOptions: NextAuthOptions = NextAuth({
         username: { label: "Username", type: "text", placeholder: "Enter your Email " },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         return {
           id: "user1",
           email: credentials?.username || "maihu422@gmail.com"
