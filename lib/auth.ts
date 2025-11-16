@@ -6,33 +6,35 @@ export const AuthOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Email",
       credentials: {
-        username: {
+        email: {
           label: "Username",
           type: "text",
-          placeholder: "Enter your Email ",
         },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         return {
           id: "1",
-          email: credentials?.username,
+          email: credentials?.email,
           name: credentials?.password,
-          image: ""
+          image: "",
         };
       },
     }),
   ],
   callbacks: {
-     jwt({ token, account, profile }) {
+    jwt({ token, account, profile }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
-      token.id = token.sub
+      token.id = token.sub;
       return token;
     },
-    session({session,token}: any){
-        session.user.id  = token.id
-        return session 
-    }
+    session({ session, token }: any) {
+      session.user.id = token.id;
+      return session;
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/signin",
+  },
 };
