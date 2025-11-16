@@ -7,7 +7,7 @@ export default  function Userinfo() {
 
 
   return <div>
-    {JSON.stringify(session.data)}
+    {JSON.stringify(session.data?.user?.image)}
     login
     
   </div>;
