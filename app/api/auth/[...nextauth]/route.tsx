@@ -1,24 +1,7 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { AuthOptions } from "@/lib/auth";
+import NextAuth from "next-auth";
 
-const authOptions: NextAuthOptions = NextAuth({
-  providers: [
-    CredentialsProvider({
-      name: "Email",
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "Enter your Email " },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        return {
-          id: "user1",
-          email: credentials?.username || "maihu422@gmail.com"
-        };
-      },
-    }),
-  ],
-  secret: process.env.NEXTAUTH_SECRET,
-});
+const auth = NextAuth(AuthOptions);
 
-export { authOptions as GET, authOptions as POST }
+export { auth as GET, auth as POST }
 
