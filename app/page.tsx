@@ -1,11 +1,17 @@
-import Userinfo from "./components/UserInfo";
+import { getServerSession } from "next-auth";
 
-export default function Home() {
+
+async function getUser(){
+  const session = await getServerSession();
+  return session
+}
+
+export default async function Home() {
+  const session = await getUser();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <Userinfo/>
+    <div>
+      {JSON.stringify(session?.user)}
     </div>
   );
 }
-
-
